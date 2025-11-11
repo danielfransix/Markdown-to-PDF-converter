@@ -1,5 +1,7 @@
 # Markdown to PDF Converter
 
+**Created by Daniel Fransix (@danielfransix)**
+
 A professional, well-organized Python application for converting Markdown documents to beautifully formatted PDF files with customizable themes and styling.
 
 ## Features
