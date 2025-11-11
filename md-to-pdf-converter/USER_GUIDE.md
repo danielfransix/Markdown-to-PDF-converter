@@ -1,4 +1,3 @@
-# Markdown to PDF converter
 # Markdown to PDF Converter - User Guide
 
 A professional-grade tool for converting markdown documents to beautifully formatted PDFs with customizable themes and styling options.

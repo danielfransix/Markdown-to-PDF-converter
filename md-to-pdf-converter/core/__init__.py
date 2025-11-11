@@ -1,0 +1,1 @@
+"""Core module for markdown to PDF conversion functionality."""
