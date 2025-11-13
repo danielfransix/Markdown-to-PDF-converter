@@ -52,7 +52,7 @@ def cli():
 @cli.command()
 @click.argument('input_file', type=click.Path(exists=True, dir_okay=False))
 @click.option('-o', '--output', type=click.Path(), help='Output PDF file path')
-@click.option('-t', '--theme', help='Theme to use for styling (optional, defaults to JetBrains Mono)')
+@click.option('-t', '--theme', help='Theme to use for styling (optional, defaults to DM Mono)')
 @click.option('-c', '--css', type=click.Path(exists=True), help='Custom CSS file')
 @click.option('--custom-css', help='Custom CSS as string')
 @click.option('-v', '--verbose', is_flag=True, help='Enable verbose output')
@@ -71,7 +71,7 @@ def convert(input_file: str, output: Optional[str], theme: Optional[str], css: O
             if theme:
                 print_info(f"Theme: {theme}")
             else:
-                print_info("Theme: Default (JetBrains Mono)")
+                print_info("Theme: Default (DM Mono)")
             if css:
                 print_info(f"Custom CSS file: {css}")
             if custom_css:
@@ -164,7 +164,7 @@ def extras():
 @cli.command()
 @click.argument('directory', type=click.Path(exists=True, file_okay=False))
 @click.option('-o', '--output-dir', type=click.Path(), help='Output directory for PDFs')
-@click.option('-t', '--theme', help='Theme to use for styling (optional, defaults to JetBrains Mono)')
+@click.option('-t', '--theme', help='Theme to use for styling (optional, defaults to DM Mono)')
 @click.option('-c', '--css', type=click.Path(exists=True), help='Custom CSS file')
 @click.option('--custom-css', help='Custom CSS as string')
 @click.option('-v', '--verbose', is_flag=True, help='Enable verbose output')
@@ -242,7 +242,7 @@ def batch(directory: str, output_dir: Optional[str], theme: Optional[str], css: 
 
 @cli.command()
 @click.argument('markdown_file', type=click.Path(exists=True, dir_okay=False))
-@click.option('-t', '--theme', help='Theme to use for preview (optional, defaults to JetBrains Mono)')
+@click.option('-t', '--theme', help='Theme to use for preview (optional, defaults to DM Mono)')
 def preview(markdown_file: str, theme: Optional[str]):
     """Generate an HTML preview of a markdown file.
     

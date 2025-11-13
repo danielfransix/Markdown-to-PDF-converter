@@ -49,6 +49,28 @@ class StyleManager:
     def _load_default_css(self) -> str:
         """Load the default CSS styling."""
         return """
+        /* DM Mono Font Face Declaration */
+        @font-face {
+            font-family: 'DM Mono';
+            src: local('DM Mono'), local('DMMono-Regular'), local('DMMono');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'DM Mono';
+            src: local('DM Mono Medium'), local('DMMono-Medium');
+            font-weight: 500;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'DM Mono';
+            src: local('DM Mono Light'), local('DMMono-Light');
+            font-weight: 300;
+            font-style: normal;
+        }
+        
         @page {
             size: A4;
             margin: 2cm;
@@ -56,21 +78,22 @@ class StyleManager:
                 content: counter(page) " / " counter(pages);
                 font-size: 10pt;
                 color: #666;
-                font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+                font-family: 'DM Mono', monospace;
             }
         }
         
-        /* Universal JetBrains Mono font override */
+        /* Universal DM Mono font override - Force all elements to use DM Mono */
         * {
-            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-family: 'DM Mono', 'JetBrains Mono', 'Monaco', 'Consolas', 'Courier New', monospace !important;
         }
         
         body {
-            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            font-family: 'DM Mono', 'JetBrains Mono', 'Monaco', 'Consolas', 'Courier New', monospace;
             line-height: 1.6;
             color: #333;
             max-width: 100%;
             font-size: 11pt;
+            font-weight: normal;
         }
         
         h1, h2, h3, h4, h5, h6 {
@@ -132,9 +155,10 @@ class StyleManager:
             background-color: #f8f9fa;
             padding: 0.2em 0.4em;
             border-radius: 3px;
-            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            font-family: 'DM Mono', 'JetBrains Mono', 'Monaco', 'Consolas', 'Courier New', monospace;
             font-size: 0.9em;
             color: #e74c3c;
+            font-weight: normal;
         }
         
         pre {
@@ -353,13 +377,13 @@ class ThemeManager:
         base_css = self.style_manager.get_default_css()
         academic_overrides = """
         body {
-            font-family: 'Times New Roman', 'Times', serif;
+            font-family: 'DM Mono', 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
             font-size: 12pt;
             line-height: 1.8;
         }
         
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Times New Roman', 'Times', serif;
+            font-family: 'DM Mono', 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
             color: #000;
         }
         
@@ -391,7 +415,7 @@ class ThemeManager:
         base_css = self.style_manager.get_default_css()
         modern_overrides = """
         body {
-            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            font-family: 'DM Mono', 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
         }
         
         h1 {

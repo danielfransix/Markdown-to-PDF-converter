@@ -1,5 +1,5 @@
-markdown2==2.4.10
-weasyprint==60.2
-Pillow>=10.4.0
+markdown2==2.5.4
+weasyprint==66.0
+Pillow>=12.0.0
 click==8.1.7
 colorama==0.4.6
