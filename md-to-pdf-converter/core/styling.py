@@ -1,6 +1,7 @@
 """CSS styling management for PDF generation."""
 
 from typing import Optional
+from pathlib import Path
 from .exceptions import StyleError
 
 
@@ -48,25 +49,27 @@ class StyleManager:
     
     def _load_default_css(self) -> str:
         """Load the default CSS styling."""
-        return """
-        /* DM Mono Font Face Declaration */
+        font_dir = Path(__file__).resolve().parent.parent / 'fonts' / 'DM_Mono'
+        font_dir_posix = font_dir.as_posix()
+        return (
+            """
         @font-face {
             font-family: 'DM Mono';
-            src: local('DM Mono'), local('DMMono-Regular'), local('DMMono');
-            font-weight: normal;
+            src: local('DM Mono'), local('DMMono-Regular'), url('file:///{FONT_DIR}/DMMono-Regular.ttf') format('truetype');
+            font-weight: 400;
             font-style: normal;
         }
         
         @font-face {
             font-family: 'DM Mono';
-            src: local('DM Mono Medium'), local('DMMono-Medium');
+            src: local('DM Mono Medium'), local('DMMono-Medium'), url('file:///{FONT_DIR}/DMMono-Medium.ttf') format('truetype');
             font-weight: 500;
             font-style: normal;
         }
         
         @font-face {
             font-family: 'DM Mono';
-            src: local('DM Mono Light'), local('DMMono-Light');
+            src: local('DM Mono Light'), local('DMMono-Light'), url('file:///{FONT_DIR}/DMMono-Light.ttf') format('truetype');
             font-weight: 300;
             font-style: normal;
         }
@@ -93,7 +96,7 @@ class StyleManager:
             color: #333;
             max-width: 100%;
             font-size: 11pt;
-            font-weight: normal;
+            font-weight: 400;
         }
         
         h1, h2, h3, h4, h5, h6 {
@@ -280,7 +283,6 @@ class StyleManager:
             border-bottom: none;
         }
         
-        /* Print optimizations */
         @media print {
             body {
                 font-size: 10pt;
@@ -299,6 +301,7 @@ class StyleManager:
             }
         }
         """
+        ).replace("{FONT_DIR}", font_dir_posix)
 
 
 class ThemeManager:

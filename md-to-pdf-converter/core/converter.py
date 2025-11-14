@@ -193,9 +193,7 @@ class MarkdownToPDFConverter:
             output_dir = Path(output_path).parent
             output_dir.mkdir(parents=True, exist_ok=True)
             
-            # Generate PDF - updated for WeasyPrint 60.2
-            # Use the correct API: document.write_pdf(target, stylesheets)
-            html_doc.write_pdf(output_path, stylesheets=[css_doc])
+            html_doc.write_pdf(output_path, stylesheets=[css_doc], font_config=self.font_config)
             
         except Exception as e:
             raise ConversionError(f"Failed to generate PDF: {e}", e)
