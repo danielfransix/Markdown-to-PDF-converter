@@ -17,17 +17,24 @@ A professional-grade Python application for converting Markdown documents to bea
 
 ### Prerequisites
 
-- Python 3.7 or higher
+- Python 3.8 or higher
 - pip (Python package installer)
 
 ### System Dependencies (Required for WeasyPrint)
 
-**For Windows:**
-```bash
-# Install GTK3 runtime (required for WeasyPrint)
-# Download from: https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer
-# Run the installer and follow the setup wizard
-```
+**For Windows (WeasyPrint 66.0):**
+- Install MSYS2: https://www.msys2.org/
+- In the "MSYS2 MINGW64" shell, install Pango:
+  ```bash
+  pacman -S --noconfirm --needed mingw-w64-x86_64-pango
+  ```
+- Make Pango’s DLLs discoverable to Python (PowerShell):
+  ```powershell
+  setx WEASYPRINT_DLL_DIRECTORIES "C:\\msys64\\mingw64\\bin"
+  # For the current shell only:
+  $env:WEASYPRINT_DLL_DIRECTORIES = "C:\\msys64\\mingw64\\bin"
+  ```
+- Ensure architecture matches (64‑bit Python → x86_64 package).
 
 **For macOS:**
 ```bash
@@ -44,20 +51,23 @@ sudo apt-get install libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf2
 ### Install Python Dependencies
 
 ```bash
-pip install -r requirements.txt
+# From project root
+pip install -r md-to-pdf-converter/requirements.txt
 ```
 
 ### Required Packages
 
-- `markdown2>=2.4.0`: Markdown parsing
-- `weasyprint>=52.5`: PDF generation engine
-- `Pillow>=8.0.0`: Image processing
-- `click>=8.0.0`: Command-line interface
-- `colorama>=0.4.4`: Cross-platform colored terminal output
+- `markdown2==2.5.4`: Markdown parsing
+- `weasyprint==66.0`: PDF generation engine
+- `Pillow>=12.0.0`: Image processing
+- `click==8.1.7`: Command-line interface
+- `colorama==0.4.6`: Cross-platform colored terminal output
 
 ### Verify Installation
 
 ```bash
+# From project root
+cd md-to-pdf-converter
 python main.py --help
 ```
 
@@ -66,6 +76,9 @@ python main.py --help
 ### Basic Usage
 
 ```bash
+# From project root
+cd md-to-pdf-converter
+
 # Convert a single markdown file
 python main.py convert document.md
 
@@ -419,8 +432,8 @@ This project is open source and available under the MIT License.
 
 ### Common Issues
 
-1. **"GTK3 runtime not found" error (Windows)**
-   - Solution: Install GTK3 runtime for Windows (see installation steps)
+1. **"Pango/GLib runtime not found" error (Windows)**
+   - Solution: Install MSYS2 and `mingw-w64-x86_64-pango`, then set `WEASYPRINT_DLL_DIRECTORIES` to `C:\msys64\mingw64\bin`.
 
 2. **"Permission denied" errors**
    - Solution: Run terminal as administrator or check file permissions
@@ -435,12 +448,17 @@ This project is open source and available under the MIT License.
    - Solution: Use verbose mode (`-v`) to see detailed error messages
 
 6. **WeasyPrint installation issues on Windows**:
-   - Install Visual C++ Build Tools
-   - Use `pip install --upgrade pip` before installing dependencies
+   - Ensure MSYS2 + Pango are installed and environment is configured (`WEASYPRINT_DLL_DIRECTORIES`).
+   - Optionally install the Microsoft Visual C++ Redistributable if DLL errors mention `vcruntime`.
+   - Upgrade pip: `pip install --upgrade pip`.
 
 7. **Font rendering issues**:
-   - Ensure system fonts are accessible
-   - Consider using web-safe fonts in custom CSS
+   - Ensure fonts referenced in CSS are installed or bundled via `@font-face`.
+   - For variable fonts, prefer pre‑instantiated static fonts to avoid deprecation warnings.
+
+8. **Deprecation warning about `instantiateVariableFont`**:
+   - Cause: FontTools deprecated older instancing API; WeasyPrint surfaces a `UserWarning`.
+   - Impact: Conversion continues (safe to ignore). To silence: set `PYTHONWARNINGS=ignore::UserWarning` or filter in Python.
 
 8. **Large file processing**:
    - For very large markdown files, consider splitting them
@@ -468,10 +486,10 @@ This project is open source and available under the MIT License.
 
 ## ✅ Quick Start Checklist
 
-- [ ] Python 3.7+ installed
-- [ ] All pip dependencies installed (`pip install -r requirements.txt`)
-- [ ] System dependencies installed (GTK3, cairo, pango)
-- [ ] Test with `python main.py --help`
+- [ ] Python 3.8+ installed
+- [ ] All pip dependencies installed (`pip install -r md-to-pdf-converter/requirements.txt`)
+- [ ] System dependencies installed (Windows: MSYS2 + Pango; macOS/Linux: cairo, pango, gdk-pixbuf)
+- [ ] Test with `cd md-to-pdf-converter && python main.py --help`
 - [ ] Try converting a sample file
 - [ ] Explore available themes with `python main.py themes`
 
