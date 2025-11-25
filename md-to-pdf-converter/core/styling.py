@@ -49,28 +49,56 @@ class StyleManager:
     
     def _load_default_css(self) -> str:
         """Load the default CSS styling."""
-        font_dir = Path(__file__).resolve().parent.parent / 'fonts' / 'DM_Mono'
+        font_dir = Path(__file__).resolve().parent.parent / 'fonts' / 'Manrope'
         font_dir_posix = font_dir.as_posix()
         return (
             """
         @font-face {
-            font-family: 'DM Mono';
-            src: local('DM Mono'), local('DMMono-Regular'), url('file:///{FONT_DIR}/DMMono-Regular.ttf') format('truetype');
+            font-family: 'Manrope';
+            src: local('Manrope ExtraLight'), url('file:///{FONT_DIR}/Manrope-ExtraLight.ttf') format('truetype');
+            font-weight: 200;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Manrope';
+            src: local('Manrope Light'), url('file:///{FONT_DIR}/Manrope-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Manrope';
+            src: local('Manrope Regular'), url('file:///{FONT_DIR}/Manrope-Regular.ttf') format('truetype');
             font-weight: 400;
             font-style: normal;
         }
         
         @font-face {
-            font-family: 'DM Mono';
-            src: local('DM Mono Medium'), local('DMMono-Medium'), url('file:///{FONT_DIR}/DMMono-Medium.ttf') format('truetype');
+            font-family: 'Manrope';
+            src: local('Manrope Medium'), url('file:///{FONT_DIR}/Manrope-Medium.ttf') format('truetype');
             font-weight: 500;
             font-style: normal;
         }
         
         @font-face {
-            font-family: 'DM Mono';
-            src: local('DM Mono Light'), local('DMMono-Light'), url('file:///{FONT_DIR}/DMMono-Light.ttf') format('truetype');
-            font-weight: 300;
+            font-family: 'Manrope';
+            src: local('Manrope SemiBold'), url('file:///{FONT_DIR}/Manrope-SemiBold.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Manrope';
+            src: local('Manrope Bold'), url('file:///{FONT_DIR}/Manrope-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Manrope';
+            src: local('Manrope ExtraBold'), url('file:///{FONT_DIR}/Manrope-ExtraBold.ttf') format('truetype');
+            font-weight: 800;
             font-style: normal;
         }
         
@@ -81,17 +109,16 @@ class StyleManager:
                 content: counter(page) " / " counter(pages);
                 font-size: 10pt;
                 color: #666;
-                font-family: 'DM Mono', monospace;
+                font-family: 'Manrope', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             }
         }
         
-        /* Universal DM Mono font override - Force all elements to use DM Mono */
         * {
-            font-family: 'DM Mono', 'JetBrains Mono', 'Monaco', 'Consolas', 'Courier New', monospace !important;
+            font-family: 'Manrope', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
         }
         
         body {
-            font-family: 'DM Mono', 'JetBrains Mono', 'Monaco', 'Consolas', 'Courier New', monospace;
+            font-family: 'Manrope', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             color: #333;
             max-width: 100%;
@@ -380,13 +407,13 @@ class ThemeManager:
         base_css = self.style_manager.get_default_css()
         academic_overrides = """
         body {
-            font-family: 'DM Mono', 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            font-family: 'Manrope', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             font-size: 12pt;
             line-height: 1.8;
         }
         
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'DM Mono', 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            font-family: 'Manrope', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             color: #000;
         }
         
@@ -418,7 +445,7 @@ class ThemeManager:
         base_css = self.style_manager.get_default_css()
         modern_overrides = """
         body {
-            font-family: 'DM Mono', 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            font-family: 'Manrope', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
         }
         
         h1 {
